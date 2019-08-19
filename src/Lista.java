@@ -12,6 +12,7 @@ public class Lista {
     public int getQuantidadeDeElementos(){
         return quantidadeDeElementos;
     }
+
     //Inserir no inicio
     public void InserirInicio(int valor){
         No proximo = null;
@@ -20,14 +21,41 @@ public class Lista {
         }catch(OutOfMemoryError error){
             System.out.printf("\nErro: Estouro de memoria! (%s)", error.getMessage());
         }
-        if(inicio.getValor() <= valor){
+        if(getQuantidadeDeElementos() < 1){
             inicio = proximo;
             fim = proximo;
+            proximo.setAnterior(proximo);
+            proximo.setProximo(proximo);
         }else{
-            inicio.setProximo(inicio);
+            proximo.setProximo(inicio);
+            proximo.setAnterior(fim);
+            fim.setProximo(proximo);
+            inicio.setAnterior(proximo);
             inicio = proximo;
         }
+        quantidadeDeElementos++;
     }
-    public void setQuantidadeDeElementos(int quantidadeDeElementos) {this.quantidadeDeElementos = quantidadeDeElementos++;}
+
+    //Retirar do inicio
+    public int RetirarInicio(){
+        No ponteiroAux = null;
+        if(getQuantidadeDeElementos() <= 0){
+            System.out.printf("\nQuantidade de elementos igual a 0! (%s)");
+            return 0;
+        }else if (quantidadeDeElementos == 1){
+            ponteiroAux = inicio;
+            inicio.setProximo(null);
+            inicio.setAnterior(null);
+        }
+        else{
+            ponteiroAux = inicio;
+            inicio = inicio.getProximo();
+            inicio.setAnterior(fim);
+            ponteiroAux.setAnterior(null);
+            ponteiroAux.setProximo(null);
+            quantidadeDeElementos--;
+        }
+        return ponteiroAux.getValor();
+    }
 
 }
