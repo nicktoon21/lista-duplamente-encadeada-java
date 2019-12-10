@@ -1,9 +1,8 @@
-import java.util.Scanner;
+// Implementação de Lista em Java.
+
 import java.lang.OutOfMemoryError;
 
 public class Lista {
-
-    Scanner read = new Scanner(System.in);
 
     private int quantidadeDeElementos = 0;
     private No inicio;
